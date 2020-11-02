@@ -24,8 +24,11 @@ class postMedia {
                     reject(err)
                 }
                 if (messages !== null) {
-                   console.log(messages)
+                   (messages.map((message)=>{
+                       console.log(message.text)
+                   }))
                 }
+                process.exit()
             })
 
         })
