@@ -1,0 +1,63 @@
+require("dotenv").config()
+const {IgApiClient} = require('instagram-private-api');
+const {readFile} = require('fs')
+const {promisify} = require('util')
+const readFileAsync = promisify(readFile);
+
+
+
+const sendInstagram = () =>{
+
+    // https://www.npmjs.com/package/instagram-private-api
+    // https://github.com/dilame/instagram-private-api/blob/5dd6b8d5852cb4b51eaf35e9bcc856f7ef9ec52b/examples/upload-photo.example.ts
+    const ig = new IgApiClient()
+    console.log(process.env.instagram_username)
+    ig.state.generateDevice(process.env.instagram_username);
+
+    async function login() {
+        // basic login-procedure
+        ig.state.generateDevice(process.env.instagram_username);
+        await ig.account.login(process.env.instagram_username, process.env.instagram_password);
+    }
+
+    (async () => {
+        await login();
+
+        const path = './wall.jpg';
+        const { latitude, longitude, searchQuery } = {
+            latitude: 0.0,
+            longitude: 0.0,
+            // not required
+            searchQuery: 'place',
+        };
+
+        /**
+         * Get the place
+         * If searchQuery is undefined, you'll get the nearest places to your location
+         * this is the same as in the upload (-configure) dialog in the app
+         */
+        const locations = await ig.search.location(latitude, longitude, searchQuery);
+
+        /**
+         * Get the first venue
+         * In the real world you would check the returned locations
+         */
+        const mediaLocation = locations[0];
+        console.log(mediaLocation);
+
+        const publishResult = await ig.publish.photo({
+            // read the file into a Buffer
+            file: await readFileAsync(path),
+            caption: 'my caption'
+        })
+
+        console.log(publishResult);
+
+
+    })();
+
+}
+
+expore.modules = sendInstagram
+
+
