@@ -11,10 +11,10 @@ const postToFacebook = () =>{
     //https://developers.facebook.com/tools/explorer
      // https://developers.facebook.com/docs/pages/access-tokens
    // console.log(process.env.facebook_access_token)
-
-    FB.setAccessToken(process.env.facebook_access_token);
+ // https://developers.facebook.com/tools/debug/accesstoken/
+    FB.setAccessToken(process.env.facebook_page_access_token);
     FB.api(
-        '/951504253458/feed',
+        '/109267807654573/feed',
         'POST',
         { "message": "Testing with api" },
         function (response) {
@@ -23,7 +23,7 @@ const postToFacebook = () =>{
                 console.log(response.error)
                 return;
             }
-            console.log('successfully posted to page!');
+            console.log(response)
         }
     );
 
