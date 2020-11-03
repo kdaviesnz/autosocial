@@ -19,4 +19,4 @@ const tweet = () =>{
     });
 }
 
-expore.modules = tweet
+module.exports = tweet

@@ -58,6 +58,6 @@ const sendInstagram = () =>{
 
 }
 
-expore.modules = sendInstagram
+module.exports = sendInstagram
 
 
