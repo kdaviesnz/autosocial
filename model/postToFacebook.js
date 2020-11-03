@@ -1,6 +1,6 @@
 require("dotenv").config()
 const {FB, FacebookApiException} = require('fb');
-
+const fs = require('fs')
 
 const postToFacebook = () =>{
 
@@ -14,7 +14,7 @@ const postToFacebook = () =>{
  // https://developers.facebook.com/tools/debug/accesstoken/
     FB.setAccessToken(process.env.facebook_page_access_token);
     FB.api(
-        '/109267807654573/feed',
+        '/' + process.env.facebook_page_id + '/feed',
         'POST',
         { "message": "Testing with api" },
         function (response) {
@@ -26,6 +26,14 @@ const postToFacebook = () =>{
             console.log(response)
         }
     );
+
+    FB.api('me/photos', 'post', { source: fs.createReadStream('wall.jpg'), caption: 'Testing posting an image to feed' }, function (res) {
+        if(!res || res.error) {
+            console.log(!res ? 'error occurred' : res.error);
+            return;
+        }
+        console.log('Post Id: ' + res.post_id);
+    });
 
 
 
