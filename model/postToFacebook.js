@@ -9,8 +9,8 @@ const postToFacebook = () =>{
     // https://developers.facebook.com/apps/1024563604676052/settings/basic
     // To genderate access token
     //https://developers.facebook.com/tools/explorer
-
-    console.log(process.env.facebook_access_token)
+     // https://developers.facebook.com/docs/pages/access-tokens
+   // console.log(process.env.facebook_access_token)
 
     FB.setAccessToken(process.env.facebook_access_token);
     FB.api(
