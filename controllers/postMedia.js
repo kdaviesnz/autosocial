@@ -29,14 +29,21 @@ class postMedia {
                 if (err) {
                     reject(err)
                 }
+
                 if (messages !== null) {
                     const message = messages[Math.floor(Math.random()* messages.length)]
                     // DateTime.fromISO('2017-05-15').ts
                     // Facebook
                     if (undefined === message.last_sent || undefined === message.last_sent.facebook || DateTime.fromISO(message.last_sent.facebook).plus({days:1}).ts < now.ts) {
                         postToFacebook(message, (response)=> {
-                            console.log("Successfully posted to Facebook")
-                            db.collection("mdma").updateOne({_id:ObjectID(message._id)}, {$set:{"last_sent.facebook": now.toISODate()}})
+                            db.collection("mdma").updateOne({_id:ObjectID(message._id)}, {$set:{"last_sent.facebook": now.toISODate()}}, (err, result)=>{
+                                if (err) {
+                                    console.log(err)
+                                    process.exit()
+                                }
+                                console.log("Successfully posted to Facebook")
+                                console.log(message)
+                            })
                         })
                     }
                     console.log(message.text)

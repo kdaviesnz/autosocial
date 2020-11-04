@@ -12,22 +12,34 @@ const postToFacebook = (message, callback) =>{
      // https://developers.facebook.com/docs/pages/access-tokens
    // console.log(process.env.facebook_access_token)
  // https://developers.facebook.com/tools/debug/accesstoken/
-    console.log('Posting to facebook')
+
     FB.setAccessToken(process.env.facebook_page_access_token);
-    FB.api(
-        '/' + process.env.facebook_page_id + '/feed',
-        'POST',
-        undefined===message.image?{ "message": message.text }:{ source: fs.createReadStream(message.image), caption: message.text},
-        function (response) {
-            if (response.error) {
-                console.log('error occurred: ' + response.error)
-                console.log(response.error)
+
+    if (undefined===message.images) {
+        FB.api(
+            '/' + process.env.facebook_page_id + '/feed',
+            'POST',
+            { "message": message.text },
+            function (response) {
+                if (response.error) {
+                    console.log('error occurred: ' + response.error)
+                    console.log(response.error)
+                    return;
+                }
+                callback(response)
+            }
+        )
+    } else {
+        FB.api('/' + process.env.facebook_page_id + '/photos', 'POST', {
+            source: fs.createReadStream("./media/images/" + message.images[Math.floor(Math.random() * message.images.length)])
+        }, function (res) {
+            if (!res || res.error) {
+                console.log(!res ? 'error occurred' : res.error);
                 return;
             }
-            callback(response)
-        }
-    )
-
+            callback(res)
+        });
+    }
 }
 
 module.exports = postToFacebook
