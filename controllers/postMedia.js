@@ -2,31 +2,43 @@ require("dotenv").config()
 // Install using npm install mongodb --save
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert');
+const { DateTime } = require('luxon');
+const postToFacebook = require('../model/postToFacebook')
 
 class postMedia {
 
     constructor() {
 
-        const uri = "mongodb+srv://" + process.env.MONGODBUSER + ":" + process.env.MONGODBPASSWORD + "@cluster0.awqh6.mongodb.net/chemistry?retryWrites=true&w=majority";
-        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.uri = "mongodb+srv://" + process.env.MONGODBUSER + ":" + process.env.MONGODBPASSWORD + "@cluster0.awqh6.mongodb.net/chemistry?retryWrites=true&w=majority";
+        this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     }
 
     send() {
 
+
         this.client.connect(err => {
 
             assert.equal(err, null);
             const db = this.client.db("autosocial")
+            var ObjectID = require('mongodb').ObjectID;
 
-            db.collection("mdma").find({}).toArray((err, messages) => {
+            // Facebook
+            const ts_now = DateTime.local().ts
+            db.collection("mdma").find({$or:[{'last_sent.facebook':null}, {'last_sent_facebook':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
                 if (err) {
                     reject(err)
                 }
                 if (messages !== null) {
-                   (messages.map((message)=>{
-                       console.log(message.text)
-                   }))
+                    const message = messages[Math.floor(Math.random()* messages.length)]
+                    // DateTime.fromISO('2017-05-15').ts
+                    // Facebook
+                    if (undefined === message.last_sent || undefined === message.last_sent.facebook || DateTime.fromISO(message.last_sent.facebook).plus({days:1}).ts < ts_now) {
+                        postToFacebook(message, (response)=> {
+                             db.collection("mdma").updateOne({_id:ObjectID(message._id)}, {$set:{"last_sent.facebook":ts_now.toISODate()}})
+                        })
+                    }
+                    console.log(message.text)
                 }
                 process.exit()
             })

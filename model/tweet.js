@@ -17,6 +17,7 @@ const tweet = () =>{
         console.log(tweet);  // Tweet body.
         console.log(response);  // Raw response object.
     });
+
 }
 
 module.exports = tweet
