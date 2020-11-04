@@ -24,7 +24,7 @@ class postMedia {
             var ObjectID = require('mongodb').ObjectID;
 
             // Facebook
-            const ts_now = DateTime.local().ts
+            const now = DateTime.local()
             db.collection("mdma").find({$or:[{'last_sent.facebook':null}, {'last_sent_facebook':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
                 if (err) {
                     reject(err)
@@ -33,16 +33,15 @@ class postMedia {
                     const message = messages[Math.floor(Math.random()* messages.length)]
                     // DateTime.fromISO('2017-05-15').ts
                     // Facebook
-                    if (undefined === message.last_sent || undefined === message.last_sent.facebook || DateTime.fromISO(message.last_sent.facebook).plus({days:1}).ts < ts_now) {
+                    if (undefined === message.last_sent || undefined === message.last_sent.facebook || DateTime.fromISO(message.last_sent.facebook).plus({days:1}).ts < now.ts) {
                         postToFacebook(message, (response)=> {
-                             db.collection("mdma").updateOne({_id:ObjectID(message._id)}, {$set:{"last_sent.facebook":ts_now.toISODate()}})
+                            console.log("Successfully posted to Facebook")
+                            db.collection("mdma").updateOne({_id:ObjectID(message._id)}, {$set:{"last_sent.facebook": now.toISODate()}})
                         })
                     }
                     console.log(message.text)
                 }
-                process.exit()
             })
-
         })
     }
 

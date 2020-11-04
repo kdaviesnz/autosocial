@@ -24,7 +24,7 @@ const postToFacebook = (message, callback) =>{
                 console.log(response.error)
                 return;
             }
-            console.log(response)
+            callback(response)
         }
     )
 
