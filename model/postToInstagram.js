@@ -4,14 +4,11 @@ const {readFile} = require('fs')
 const {promisify} = require('util')
 const readFileAsync = promisify(readFile);
 
-
-
-const sendInstagram = () =>{
+const postToInstagram = (message, callback) =>{
 
     // https://www.npmjs.com/package/instagram-private-api
     // https://github.com/dilame/instagram-private-api/blob/5dd6b8d5852cb4b51eaf35e9bcc856f7ef9ec52b/examples/upload-photo.example.ts
     const ig = new IgApiClient()
-    console.log(process.env.instagram_username)
     ig.state.generateDevice(process.env.instagram_username);
 
     async function login() {
@@ -23,7 +20,7 @@ const sendInstagram = () =>{
     (async () => {
         await login();
 
-        const path = './wall.jpg';
+        const path = "./media/images/" + message.images[Math.floor(Math.random() * message.images.length)];
         const { latitude, longitude, searchQuery } = {
             latitude: 0.0,
             longitude: 0.0,
@@ -43,21 +40,20 @@ const sendInstagram = () =>{
          * In the real world you would check the returned locations
          */
         const mediaLocation = locations[0];
-        console.log(mediaLocation);
 
         const publishResult = await ig.publish.photo({
             // read the file into a Buffer
             file: await readFileAsync(path),
-            caption: 'my caption'
+            caption: message.hashtags
         })
 
-        console.log(publishResult);
+        callback(publishResult)
 
 
     })();
 
 }
 
-module.exports = sendInstagram
+module.exports = postToInstagram
 
 
