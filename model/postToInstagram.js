@@ -3,6 +3,7 @@ const {IgApiClient} = require('instagram-private-api');
 const {readFile} = require('fs')
 const {promisify} = require('util')
 const readFileAsync = promisify(readFile);
+const uniqid = require('uniqid');
 
 const postToInstagram = (message, callback) =>{
 
@@ -44,7 +45,7 @@ const postToInstagram = (message, callback) =>{
         const publishResult = await ig.publish.photo({
             // read the file into a Buffer
             file: await readFileAsync(path),
-            caption: message.hashtags
+            caption: uniqid() +  ' ' + message.hashtags
         })
 
         callback(publishResult)
