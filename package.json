@@ -11,7 +11,10 @@
     "instagram-private-api": "^1.43.1",
     "luxon": "^1.25.0",
     "mongodb": "^3.6.2",
-    "twitter": "^1.7.1"
+    "npm": "^6.14.9",
+    "twitter": "^1.7.1",
+    "uniqid": "^5.2.0",
+    "update": "^0.7.4"
   },
   "devDependencies": {},
   "scripts": {

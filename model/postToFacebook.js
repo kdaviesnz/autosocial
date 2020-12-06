@@ -1,6 +1,7 @@
 require("dotenv").config()
 const {FB, FacebookApiException} = require('fb');
 const fs = require('fs')
+const uniqid = require('uniqid');
 
 const postToFacebook = (message, callback) =>{
 
@@ -16,6 +17,8 @@ const postToFacebook = (message, callback) =>{
     FB.setAccessToken(process.env.facebook_page_access_token);
 
     if (undefined===message.images) {
+
+        message.text = uniqid() + ' ' + message.text
         FB.api(
             '/' + process.env.facebook_page_id + '/feed',
             'POST',
