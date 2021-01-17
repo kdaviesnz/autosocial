@@ -1,4 +1,4 @@
-
+require("dotenv").config('/home/kdavies/Development/autosocial/.env')
 const {IgApiClient} = require('instagram-private-api');
 const {readFile} = require('fs')
 const {promisify} = require('util')
