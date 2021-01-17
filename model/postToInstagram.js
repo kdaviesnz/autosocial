@@ -1,4 +1,4 @@
-require("dotenv").config()
+
 const {IgApiClient} = require('instagram-private-api');
 const {readFile} = require('fs')
 const {promisify} = require('util')
@@ -21,7 +21,7 @@ const postToInstagram = (message, callback) =>{
     (async () => {
         await login();
 
-        const path = "./media/images/" + message.images[Math.floor(Math.random() * message.images.length)];
+        const path = process.env.FULLPATH + "media/images/" + message.images[Math.floor(Math.random() * message.images.length)];
         const { latitude, longitude, searchQuery } = {
             latitude: 0.0,
             longitude: 0.0,
