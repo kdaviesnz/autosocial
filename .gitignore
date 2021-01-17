@@ -4,3 +4,6 @@
 /.idea/workspace.xml
 ./node_modules
 /node_modules
+./package-lock.json
+/package-lock.json
+package-lock.json
