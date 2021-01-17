@@ -13,7 +13,7 @@ class postMedia {
     constructor() {
 
         this.uri = "mongodb+srv://" + process.env.MONGODBUSER + ":" + process.env.MONGODBPASSWORD + "@cluster0.awqh6.mongodb.net/chemistry?retryWrites=true&w=majority";
-        console.log(this.uri)
+        //console.log(this.uri)
         this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     }
