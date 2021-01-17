@@ -1,5 +1,5 @@
 
-require("dotenv").config('/home/kdavies/Development/autosocial/.env')
+require("dotenv").config('/home/kdavies/Development/autosocial')
 // Install using npm install mongodb --save
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert');
