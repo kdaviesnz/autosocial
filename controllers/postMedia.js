@@ -12,6 +12,7 @@ class postMedia {
     constructor() {
 
         this.uri = "mongodb+srv://" + process.env.MONGODBUSER + ":" + process.env.MONGODBPASSWORD + "@cluster0.awqh6.mongodb.net/chemistry?retryWrites=true&w=majority";
+        console.log(this.uri)
         this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     }
@@ -21,7 +22,13 @@ class postMedia {
 
         this.client.connect(err => {
 
-            assert.equal(err, null);
+            if (err !== null) {
+                console.log("Error connecting to mongo database")
+                process.exit()
+            } else {
+                console.log("Connected to database ok, proceeding ...")
+            }
+            process.exit()
             const db = this.client.db("autosocial")
             var ObjectID = require('mongodb').ObjectID;
 
