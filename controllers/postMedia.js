@@ -29,7 +29,7 @@ class postMedia {
             } else {
                 console.log("Connected to database ok, proceeding ...")
             }
-            process.exit()
+            //process.exit()
             const db = this.client.db("autosocial")
             var ObjectID = require('mongodb').ObjectID;
 
