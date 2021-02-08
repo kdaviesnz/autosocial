@@ -35,7 +35,7 @@ const postToFacebook = (message, callback) =>{
     } else {
         FB.api('/' + process.env.facebook_page_id + '/photos', 'POST', {
             source: fs.createReadStream(process.env.FULLPATH + "media/images/" + message.images[Math.floor(Math.random() * message.images.length)]),
-            caption:message.hashtags
+            caption:'https://givealittle.co.nz/donate/cause/campaign-to-get-mdma-de-scheduled ' + message.hashtags
         }, function (res) {
             if (!res || res.error) {
                 console.log(!res ? 'error occurred' : res.error);
