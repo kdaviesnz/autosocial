@@ -35,14 +35,19 @@ class postMedia {
 
             const now = DateTime.local()
 
-            console.log("Media:"+media)
-            console.log(mmmedia)
+//            console.log("Media:"+media)
+  //          console.log(mmmedia)
 
 
             switch (media) {
                 case 'instagram':
                     // Instagram
-                    db.collection("mdma").find({$or:[{'last_sent.instagram':null}, {'last_sent_instagram':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+                    //  db.collection("mdma").find({$or:[{'last_sent.instagram':null}, {'last_sent_instagram':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+                    db.collection("mdma").find({}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+
+                        console.log(messages)
+                        console.log(jjjj)
+
 
                         if (err) {
                             console.log("Error posting to instagram")
