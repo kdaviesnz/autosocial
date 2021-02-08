@@ -60,8 +60,8 @@ class postMedia {
                             const message = messages[Math.floor(Math.random()* messages.length)]
                             // DateTime.fromISO('2017-05-15').ts
                             // Instagram
-                            console.log(message)
-                            console.log(mmmmssage)
+                            //console.log(message)
+                            //console.log(mmmmssage)
                           //  if (undefined === message.last_sent || undefined === message.last_sent.instagram || DateTime.fromISO(message.last_sent.instagram).plus({days:1}).ts < now.ts) {
                                 console.log('Posting to instagram:')
                                 console.log(message)
