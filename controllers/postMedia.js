@@ -35,7 +35,7 @@ class postMedia {
 
             const now = DateTime.local()
 
-            console.log(media)
+            console.log("Media:"+media)
             console.log(mmmedia)
 
 
