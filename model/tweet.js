@@ -17,8 +17,8 @@ const tweet = (message, callback) =>{
         const path = process.env.FULLPATH + "media/images/" + message.images[Math.floor(Math.random() * message.images.length)];
         const data = require('fs').readFileSync(path);
 
-        console.log('Got image: ' + path)
-        console.log('Posting media')
+       // console.log('Got image: ' + path)
+       // console.log('Posting media')
 
         // Make post request on media endpoint. Pass file data as media parameter
         client.post('media/upload', {media: data}, function(error, media, response) {
@@ -29,12 +29,12 @@ const tweet = (message, callback) =>{
             }
 
             // If successful, a media object will be returned.
-            console.log("Twitter, media object:")
-            console.log(media);
+            //console.log("Twitter, media object:")
+            //console.log(media);
 
             // Lets tweet it
             const status = {
-                status: message.hashtags,
+                status: 'https://givealittle.co.nz/donate/cause/campaign-to-get-mdma-de-scheduled ' + message.hashtags,
                 media_ids: media.media_id_string // Pass the media id string
             }
 

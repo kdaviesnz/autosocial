@@ -18,7 +18,7 @@ const postToFacebook = (message, callback) =>{
 
     if (undefined===message.images) {
 
-        message.text = uniqid() + ' ' + message.text
+        message.text = uniqid() + ' https://givealittle.co.nz/donate/cause/campaign-to-get-mdma-de-scheduled ' + message.text
         FB.api(
             '/' + process.env.facebook_page_id + '/feed',
             'POST',
