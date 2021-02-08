@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config('/home/kdavies/Development/autosocial/.env')
 const Twitter = require('twitter');
 
 const tweet = (message, callback) =>{
@@ -14,7 +14,7 @@ const tweet = (message, callback) =>{
 
     if (undefined !== message.images && message.images.length > 0) {
 
-        const path = "./media/images/" + message.images[Math.floor(Math.random() * message.images.length)];
+        const path = process.env.FULLPATH + "media/images/" + message.images[Math.floor(Math.random() * message.images.length)];
         const data = require('fs').readFileSync(path);
 
         console.log('Got image: ' + path)

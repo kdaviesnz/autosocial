@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config('/home/kdavies/Development/autosocial/.env')
 const {FB, FacebookApiException} = require('fb');
 const fs = require('fs')
 const uniqid = require('uniqid');
@@ -34,7 +34,7 @@ const postToFacebook = (message, callback) =>{
         )
     } else {
         FB.api('/' + process.env.facebook_page_id + '/photos', 'POST', {
-            source: fs.createReadStream("./media/images/" + message.images[Math.floor(Math.random() * message.images.length)]),
+            source: fs.createReadStream(process.env.FULLPATH + "media/images/" + message.images[Math.floor(Math.random() * message.images.length)]),
             caption:message.hashtags
         }, function (res) {
             if (!res || res.error) {
