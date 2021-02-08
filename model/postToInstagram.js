@@ -45,7 +45,7 @@ const postToInstagram = (message, callback) =>{
         const publishResult = await ig.publish.photo({
             // read the file into a Buffer
             file: await readFileAsync(path),
-            caption: uniqid() +  ' ' + message.hashtags
+            caption: uniqid() +  ' https://givealittle.co.nz/donate/cause/campaign-to-get-mdma-de-scheduled ' + message.hashtags
         })
 
         callback(publishResult)
