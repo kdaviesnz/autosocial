@@ -7,8 +7,6 @@ const uniqid = require('uniqid');
 
 const postToInstagram = (message, callback) =>{
 
-    console.log(posttoinstagram)
-
     // https://www.npmjs.com/package/instagram-private-api
     // https://github.com/dilame/instagram-private-api/blob/5dd6b8d5852cb4b51eaf35e9bcc856f7ef9ec52b/examples/upload-photo.example.ts
     const ig = new IgApiClient()
