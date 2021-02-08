@@ -84,7 +84,8 @@ class postMedia {
                     break;
                 case 'facebook':
                     // Facebook
-                    db.collection("mdma").find({$or:[{'last_sent.facebook':null}, {'last_sent_facebook':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+                   // db.collection("mdma").find({$or:[{'last_sent.facebook':null}, {'last_sent_facebook':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+                    db.collection("mdma").find({}, {'$sort':{'rand':1}}).toArray((err, messages) => {
 
                         if (err) {
                             console.log("Error posting to facebook")
@@ -113,8 +114,9 @@ class postMedia {
                     })
                     break
                 case 'twitter':
-                    console.log("Sending tweet")
-                    db.collection("mdma").find({$or:[{'last_sent.twitter':null}, {'last_sent_twitter':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+                   // console.log("Sending tweet")
+                   // db.collection("mdma").find({$or:[{'last_sent.twitter':null}, {'last_sent_twitter':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
+                    db.collection("mdma").find({}, {'$sort':{'rand':1}}).toArray((err, messages) => {
 
                         if (err) {
                             console.log("Error posting to twitter")
