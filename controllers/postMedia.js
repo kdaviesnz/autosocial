@@ -45,12 +45,9 @@ class postMedia {
                     //  db.collection("mdma").find({$or:[{'last_sent.instagram':null}, {'last_sent_instagram':{"$lte":DateTime.local().minus({'days':1}).toISODate()}}]}, {'$sort':{'rand':1}}).toArray((err, messages) => {
                     db.collection("mdma").find({}, {'$sort':{'rand':1}}).toArray((err, messages) => {
 
-                        console.log(messages)
-                        console.log(jjjj)
-
 
                         if (err) {
-                            console.log("Error posting to instagram")
+                            console.log("DB Error posting to instagram")
                             console.log(err)
                             process.exit()
                         }
@@ -63,7 +60,10 @@ class postMedia {
                             const message = messages[Math.floor(Math.random()* messages.length)]
                             // DateTime.fromISO('2017-05-15').ts
                             // Instagram
-                            if (undefined === message.last_sent || undefined === message.last_sent.instagram || DateTime.fromISO(message.last_sent.instagram).plus({days:1}).ts < now.ts) {
+                            console.log(message)
+                            console.log(mmmmssage)
+                          //  if (undefined === message.last_sent || undefined === message.last_sent.instagram || DateTime.fromISO(message.last_sent.instagram).plus({days:1}).ts < now.ts) {
+                            if (true) {
                                 console.log('Posting to instagram:')
                                 console.log(message)
                                 postToInstagram(message, (response)=> {
