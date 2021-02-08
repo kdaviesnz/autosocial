@@ -63,8 +63,8 @@ class postMedia {
                             //console.log(message)
                             //console.log(mmmmssage)
                           //  if (undefined === message.last_sent || undefined === message.last_sent.instagram || DateTime.fromISO(message.last_sent.instagram).plus({days:1}).ts < now.ts) {
-                                console.log('Posting to instagram:')
-                                console.log(message)
+                                //console.log('Posting to instagram:')
+                                //console.log(message)
                                 postToInstagram(message, (response)=> {
                                     db.collection("mdma").updateOne({_id:ObjectID(message._id)}, {$set:{"last_sent.instagram": now.toISODate()}}, (err, result)=>{
                                         if (err) {
