@@ -35,6 +35,9 @@ class postMedia {
 
             const now = DateTime.local()
 
+            console.log(media)
+            console.log(mmmedia)
+
 
             switch (media) {
                 case 'instagram':
