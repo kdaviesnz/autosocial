@@ -27,7 +27,7 @@ class postMedia {
                 console.log("Error connecting to mongo database")
                 process.exit()
             } else {
-                console.log("Connected to database ok, proceeding ...")
+               // console.log("Connected to database ok, proceeding ...")
             }
             //process.exit()
             const db = this.client.db("autosocial")
