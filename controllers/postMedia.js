@@ -63,7 +63,6 @@ class postMedia {
                             console.log(message)
                             console.log(mmmmssage)
                           //  if (undefined === message.last_sent || undefined === message.last_sent.instagram || DateTime.fromISO(message.last_sent.instagram).plus({days:1}).ts < now.ts) {
-                            if (true) {
                                 console.log('Posting to instagram:')
                                 console.log(message)
                                 postToInstagram(message, (response)=> {
@@ -77,7 +76,7 @@ class postMedia {
                                         process.exit()
                                     })
                                 })
-                            }
+                           // }
 
                         }
                     })
